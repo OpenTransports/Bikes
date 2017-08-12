@@ -7,7 +7,9 @@ import (
 	"github.com/go-siris/siris"
 )
 
-const serverURL = "http://api.citybik.es/"
+const citybikesServerURL = "http://api.citybik.es/"
+
+var serverURL = os.Getenv("SERVER_URL")
 
 var agencies []models.Agency
 
@@ -22,7 +24,7 @@ func main() {
 	app := siris.New()
 
 	// Serve medias files
-	// app.StaticWeb("/medias", "./medias")
+	app.StaticWeb("/medias", "./medias")
 
 	// Build api
 	// /api/transports?latitude=...&longitude=...

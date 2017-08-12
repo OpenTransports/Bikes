@@ -10,7 +10,7 @@ import (
 )
 
 func fetchAgencies() ([]models.Agency, error) {
-	response, err := http.Get(serverURL + "/v2/networks")
+	response, err := http.Get(citybikesServerURL + "/v2/networks")
 
 	if err != nil {
 		return nil, fmt.Errorf("Error fetching networks\n	==> %v", err)
@@ -40,6 +40,7 @@ func fetchAgencies() ([]models.Agency, error) {
 			Name:        net.Name,
 			ID:          net.ID,
 			Radius:      20000,
+			IconsURL:    []string{serverURL + "/medias/bicycle.png"},
 			Types:       []int{models.Bike},
 			TypesString: []string{net.Name},
 			URL:         "https://api.citybik.es/v2",

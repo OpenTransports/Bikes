@@ -10,7 +10,7 @@ import (
 )
 
 func fetchTransports(agencie models.Agency) ([]models.Transport, error) {
-	response, err := http.Get(serverURL + "/v2/networks/" + agencie.ID)
+	response, err := http.Get(citybikesServerURL + "/v2/networks/" + agencie.ID)
 	if err != nil {
 		return nil, fmt.Errorf("Error fetching %v\n	==> %v", agencie, err)
 	}
