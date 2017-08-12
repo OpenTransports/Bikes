@@ -26,7 +26,7 @@ func main() {
 
 	// Build api
 	// /api/transports?latitude=...&longitude=...
-	// app.Get("/transports", getTransports)
+	app.Get("/transports", getTransports)
 	// /api/agencies?latitude=...&longitude=...
 	app.Get("/agencies", getAgencies)
 

@@ -34,6 +34,7 @@ func fetchTransports(agencie models.Agency) ([]models.Transport, error) {
 
 	for i, station := range content.Network.Stations {
 		transports[i] = models.Transport{
+			ID:        station.ID,
 			Name:      station.Name,
 			AgencyID:  agencie.ID,
 			Line:      agencie.ID,
