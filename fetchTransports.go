@@ -9,17 +9,18 @@ import (
 	"github.com/OpenTransports/lib-go/models"
 )
 
-func fetchTransports(agencie models.Agency) ([]models.Transport, error) {
-	response, err := http.Get(citybikesServerURL + "/v2/networks/" + agencie.ID)
+func fetchTransports(agency models.Agency) ([]models.Transport, error) {
+	response, err := http.Get(citybikesServerURL + "/v2/networks/" + agency.ID)
+
 	if err != nil {
-		return nil, fmt.Errorf("Error fetching %v\n	==> %v", agencie, err)
+		return nil, fmt.Errorf("Error fetching %v\n	==> %v", agency, err)
 	}
 
 	defer response.Body.Close()
 
 	body, err := ioutil.ReadAll(response.Body)
 	if err != nil {
-		return nil, fmt.Errorf("Error reading body from %v\n	==> %v", agencie, err)
+		return nil, fmt.Errorf("Error reading body from %v\n	==> %v", agency, err)
 	}
 
 	content := struct {
@@ -27,7 +28,7 @@ func fetchTransports(agencie models.Agency) ([]models.Transport, error) {
 	}{}
 	err = json.Unmarshal(body, &content)
 	if err != nil {
-		return nil, fmt.Errorf("Error parsing body from %v\n	==> %v", agencie, err)
+		return nil, fmt.Errorf("Error parsing body from %v\n	==> %v", agency, err)
 	}
 
 	transports := make([]models.Transport, len(content.Network.Stations))
@@ -36,8 +37,8 @@ func fetchTransports(agencie models.Agency) ([]models.Transport, error) {
 		transports[i] = models.Transport{
 			ID:        station.ID,
 			Name:      station.Name,
-			AgencyID:  agencie.ID,
-			Line:      agencie.ID,
+			AgencyID:  agency.ID,
+			Line:      agency.ID,
 			Type:      models.Bike,
 			Available: station.FreeBikes,
 			Empty:     station.EmptySlots,

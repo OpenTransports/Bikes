@@ -7,7 +7,7 @@ import (
 	"github.com/go-siris/siris"
 )
 
-const citybikesServerURL = "http://api.citybik.es/"
+const citybikesServerURL = "http://api.citybik.es"
 
 var serverURL = os.Getenv("SERVER_URL")
 
