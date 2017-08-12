@@ -28,10 +28,10 @@ func fetchAgencies() ([]models.Agency, error) {
 		Networks []network `json:"networks"`
 	}{}
 
-	err = json.Unmarshal(body, &content)
-	if err != nil {
-		return nil, fmt.Errorf("Error parsing body\n	==> %v", err)
-	}
+	_ = json.Unmarshal(body, &content)
+	// if err != nil {
+	// 	return nil, fmt.Errorf("Error parsing body\n	==> %v", err)
+	// }
 
 	agencies := make([]models.Agency, len(content.Networks))
 
