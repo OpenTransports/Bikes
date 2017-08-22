@@ -35,13 +35,19 @@ func fetchTransports(agency models.Agency) ([]models.Transport, error) {
 
 	for i, station := range content.Network.Stations {
 		transports[i] = models.Transport{
-			ID:        station.ID,
-			Name:      station.Name,
-			AgencyID:  agency.ID,
-			Line:      agency.ID,
-			Type:      models.Bike,
-			Available: station.FreeBikes,
-			Empty:     station.EmptySlots,
+			ID:       station.ID,
+			Name:     station.Name,
+			AgencyID: agency.ID,
+			Line:     agency.ID,
+			Type:     models.Bike,
+			Informations: []models.Information{
+				models.Information{
+					Content: []string{fmt.Sprintf("%v", station.FreeBikes)},
+				},
+				models.Information{
+					Content: []string{fmt.Sprintf("%v", station.EmptySlots)},
+				},
+			},
 			Position: models.Position{
 				Latitude:  station.Latitude,
 				Longitude: station.Longitude,

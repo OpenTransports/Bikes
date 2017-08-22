@@ -37,14 +37,16 @@ func fetchAgencies() ([]models.Agency, error) {
 
 	for i, net := range content.Networks {
 		agencies[i] = models.Agency{
-			Name:        net.Name,
-			ID:          net.ID,
-			Radius:      20000,
-			IconsURL:    []string{serverURL + "/medias/bicycle.png"},
-			Types:       []int{models.Bike},
-			TypesString: []string{net.Name},
-			URL:         "https://api.citybik.es/v2",
-			Git:         "https://github.com/eskerda/pybikes",
+			Name:   net.Name,
+			ID:     net.ID,
+			Radius: 20000,
+			URL:    "https://api.citybik.es/v2",
+			Types: map[int]models.TypeInfo{
+				models.Bike: models.TypeInfo{
+					Name: net.Name,
+					Icon: serverURL + "/medias/bicycle.png",
+				},
+			},
 			Center: models.Position{
 				Latitude:  net.Location.Latitude,
 				Longitude: net.Location.Longitude,

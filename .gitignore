@@ -1,3 +1,6 @@
 *.test
 
 Bikes
+
+vendor/*
+!vendor/vendor.json
