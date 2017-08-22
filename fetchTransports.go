@@ -42,9 +42,11 @@ func fetchTransports(agency models.Agency) ([]models.Transport, error) {
 			Type:     models.Bike,
 			Informations: []models.Information{
 				models.Information{
+					Title:   "Available",
 					Content: []string{fmt.Sprintf("%v", station.FreeBikes)},
 				},
 				models.Information{
+					Title:   "Empty spots",
 					Content: []string{fmt.Sprintf("%v", station.EmptySlots)},
 				},
 			},
